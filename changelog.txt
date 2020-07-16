@@ -1,0 +1,28 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 2019.12.13
+  1. Now supports decimal RGB codes:
+    - Ex. 135.245.40.128
+  2. Presets have been added!:
+    - None (vanilla)
+    - Default Custom Map Colors
+    - Pastels
+    - Neons
+    - Invisible Factory
+    - Monochromes
+    - Christmas
+
+  3. Map tile presets:
+    - Default 0.17 (with saturation multiplier)
+    - Winter Wonderland
+    - Dark Side of the Moon
+    - Black
+    - Error: Map not found.
+
+  4. Added Entity Colors:
+    - Turrets
+    - Walls and Gates
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+  Info:
+    - Initial release

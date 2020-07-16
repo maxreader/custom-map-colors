@@ -1,37 +1,75 @@
+local presets = require("presets")
+customMapColorsAllowedPresets = {}
+for k,_ in pairs(presets) do
+    table.insert(customMapColorsAllowedPresets, k)
+end
+
 data:extend({
+    {
+        type = "string-setting",
+        name = "custom-map-colors-preset",
+        setting_type = "startup",
+        default_value = "Default",
+        allowed_values = customMapColorsAllowedPresets,
+        order = "1"
+    },
+    {
+        type = "string-setting",
+        name = "custom-map-colors-monochrome",
+        setting_type = "startup",
+        default_value = "0000bb",
+        order = "2"
+    },
+    {
+        type = "string-setting",
+        name = "custom-map-colors-map-tiles-preset",
+        setting_type = "startup",
+        default_value = "Default 0.17",
+        allowed_values = {"Default 0.17","Winter Wonderland","Dark Side of the Moon","Black","Error: Map not found."},
+        order = "3"
+    },
+    {
+        type = "double-setting",
+        name = "custom-map-colors-map-tiles-multiplier",
+        setting_type = "startup",
+        default_value = 1,
+        minimum_value = 0.1,
+        maximum_value = 10,
+        order = "4"
+    },
     {
         type = "bool-setting",
         name = "use-custom-default-friendly-color",
         setting_type = "startup",
-        default_value = true,
-        order = "aa"
+        default_value = false,
+        order = "a"
     },
     {
         type = "string-setting",
         name = "custom-default-friendly-color",
         setting_type = "startup",
         default_value = "006192",
-        order = "aaa"
+        order = "aa"
     },
     {
         type = "bool-setting",
         name = "use-custom-transport-belt-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "ab"
     },
     {
         type = "string-setting",
         name = "custom-transport-belt-color",
         setting_type = "startup",
-        default_value = "FABA00",
+        default_value = "fAba00",
         order = "aba"
     },
     {
         type = "bool-setting",
         name = "use-custom-fast-transport-belt-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abc"
     },
     {
@@ -45,7 +83,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-express-transport-belt-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abe"
     },
     {
@@ -59,7 +97,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-pipe-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abg"
     },
     {
@@ -73,7 +111,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-assembling-machine-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abi"
     },
     {
@@ -87,7 +125,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-chemical-plant-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abk"
     },
     {
@@ -99,14 +137,14 @@ data:extend({
     },
     {
         type = "bool-setting",
-        name = "use-custom-refinery-color",
+        name = "use-custom-oil-refinery-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abm"
     },
     {
         type = "string-setting",
-        name = "custom-refinery-color",
+        name = "custom-oil-refinery-color",
         setting_type = "startup",
         default_value = "328032",
         order = "abn"
@@ -115,7 +153,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-furnace-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abo"
     },
     {
@@ -129,7 +167,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-lab-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abq"
     },
     {
@@ -143,7 +181,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-rocket-silo-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abs"
     },
     {
@@ -171,7 +209,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-centrifuge-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abw"
     },
     {
@@ -185,7 +223,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-reactor-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "aby"
     },
     {
@@ -199,7 +237,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-heat-pipe-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abza"
     },
     {
@@ -213,7 +251,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-boiler-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "abzc"
     },
     {
@@ -227,7 +265,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-generator-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "aca"
     },
     {
@@ -241,7 +279,7 @@ data:extend({
         type = "bool-setting",
         name = "use-custom-electric-pole-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "acc"
     },
     {
@@ -283,7 +321,7 @@ data:extend({
         type ="bool-setting",
         name = "use-custom-radar-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "aci"
     },
     {
@@ -297,7 +335,7 @@ data:extend({
         type ="bool-setting",
         name = "use-custom-roboport-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "ack"
     },
     {
@@ -353,7 +391,7 @@ data:extend({
         type ="bool-setting",
         name = "use-custom-refined-concrete-color",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
         order = "acs"
     },
     {
@@ -418,5 +456,75 @@ data:extend({
         setting_type = "startup",
         default_value = "9fcacc",
         order = "adb"
+    },
+    {
+        type ="bool-setting",
+        name = "use-custom-ammo-turret-color",
+        setting_type = "startup",
+        default_value = false,
+        order = "adc"
+    },
+    {
+        type = "string-setting",
+        name = "custom-ammo-turret-color",
+        setting_type = "startup",
+        default_value = "caa718",
+        order = "add"
+    },
+    {
+        type ="bool-setting",
+        name = "use-custom-electric-turret-color",
+        setting_type = "startup",
+        default_value = false,
+        order = "ade"
+    },
+    {
+        type = "string-setting",
+        name = "custom-electric-turret-color",
+        setting_type = "startup",
+        default_value = "d92e2e",
+        order = "adf"
+    },
+    {
+        type ="bool-setting",
+        name = "use-custom-fluid-turret-color",
+        setting_type = "startup",
+        default_value = false,
+        order = "adg"
+    },
+    {
+        type = "string-setting",
+        name = "custom-fluid-turret-color",
+        setting_type = "startup",
+        default_value = "eb7303",
+        order = "adh"
+    },
+    {
+        type ="bool-setting",
+        name = "use-custom-wall-color",
+        setting_type = "startup",
+        default_value = false,
+        order = "adi"
+    },
+    {
+        type = "string-setting",
+        name = "custom-wall-color",
+        setting_type = "startup",
+        default_value = "cddacd",
+        order = "adj"
+    },
+    {
+        type ="bool-setting",
+        name = "use-custom-gate-color",
+        setting_type = "startup",
+        default_value = false,
+        order = "adk"
+    },
+    {
+        type = "string-setting",
+        name = "custom-gate-color",
+        setting_type = "startup",
+        default_value = "808080",
+        order = "adl"
     }
 })
