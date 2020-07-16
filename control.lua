@@ -117,14 +117,16 @@ local function create_tab(parent, name, data, locale_type)
             tab_outline.style.maximal_height = 600
             local tab_scroll = tab_outline.add({type = 'scroll-pane', name = 'scroll', style = 'scroll_pane_under_subheader', direction = 'vertical'})
             tab_scroll.style.padding = 0
+            tab_scroll.style.margin = 0
             local tab_body = tab_scroll.add({type = 'table', name = 'body', style = 'map-legend-table',    column_count = 3, direction = 'horizontal'})
                 for k,v in pairs(data) do
                     if locale_type == "custom-map-colors" then
                         tab_body.add({type = 'label', name = k..'icon', caption = iconMap[k]})
+                        tab_body.add({type = 'label', name = k, caption = {locale_type..'.'..k}})
                     else
                         tab_body.add({type = 'label', name = k..'icon', caption = "[img="..locale_type.."/"..k.."]"})
+                        tab_body.add({type = 'label', name = k, caption = {locale_type.."-name."..k}})
                     end
-                    tab_body.add({type = 'label', name = k, caption = {locale_type.."-name."..k}})
                     tab_body[k].style.vertically_stretchable = true
                     tab_body[k].style.horizontally_stretchable = true
                     tab_body.add({type = 'label', name = k..'color', caption = {"custom-map-colors.map-legend-color", v.r, v.g, v.b}})
