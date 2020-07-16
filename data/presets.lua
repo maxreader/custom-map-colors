@@ -265,7 +265,7 @@ return {
     concrete = "171159",
     ["hazard-concrete"] = "9f1f69",
     ["refined-concrete"] = "1e1673",
-    ["refined-hazard-concrete"] = "9f1f69"
+    ["refined-hazard-concrete"] = "661343"
   },
 
   ["Jazz Cup"] = {

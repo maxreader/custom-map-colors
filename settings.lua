@@ -1,5 +1,5 @@
-local presets = require("presets")
-local mapTiles = require("supported-entities.map-tiles")
+local presets = require("data.presets")
+local mapTiles = require("data.map-tiles-data")
 local customMapColorsAllowedPresets = {}
 for k,_ in pairs(presets) do
     table.insert(customMapColorsAllowedPresets, k)

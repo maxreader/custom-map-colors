@@ -93,10 +93,10 @@ end
 function colorLib.multiply_color(c1, n)
 	return
 	{
-	  (c1.r or c1[1] or 0) * (n or 0),
-	  (c1.g or c1[2] or 0) * (n or 0),
-	  (c1.b or c1[3] or 0) * (n or 0),
-	  (c1.a)
+	  r = (c1.r or c1[1] or 0) * (n or 0),
+	  g = (c1.g or c1[2] or 0) * (n or 0),
+	  b = (c1.b or c1[3] or 0) * (n or 0),
+	  a = (c1.a)
 	}
 end
 
@@ -120,7 +120,12 @@ function colorLib.RGBtoHSL(color)
 		h = h + 360
 	end
 	local l = (min+max)/2
-	local s = min == 1 and 0 or max == 0 or ((max-l)/math.min(l,1-l))
+	local s = 0
+	if min == 1 or max == 0 then
+	else
+		s = (max-l)/math.min(l,1-l)
+	end
+	--local s = (min == 1 and 0) or (max == 0 and 0) or ((max-l)/math.min(l,1-l))
 	return{
 		h = h,
 		s = s,

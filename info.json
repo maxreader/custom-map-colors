@@ -1,11 +1,11 @@
 {
     "name": "custom-map-colors",
-    "version": "0.4.1",
+    "version": "0.5.0",
     "title": "Custom Map Colors",
     "author": "Maxreader",
     "contact": "",
     "homepage": "",
     "factorio_version": "0.18",
-    "dependencies": ["base >= 0.17"],
+    "dependencies": ["base >= 0.18.0"],
     "description": "This mod allows you to change the color that entities appear as in Map View. There are default colors set for many entities, as well as selectable presets, and full control over individual entity types."
 }
