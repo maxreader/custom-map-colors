@@ -84,6 +84,17 @@ local function generate_map_legend_data()
         ["refined-concrete"] = true,
         ["refined-hazard-concrete-left"] = true,
         ["refined-hazard-concrete-right"] = true,
+        ["acid-refined-concrete"] = true,
+        ["black-refined-concrete"] = true,
+        ["blue-refined-concrete"] = true,
+        ["brown-refined-concrete"] = true,
+        ["cyan-refined-concrete"] = true,
+        ["green-refined-concrete"] = true,
+        ["orange-refined-concrete"] = true,
+        ["pink-refined-concrete"] = true,
+        ["purple-refined-concrete"] = true,
+        ["red-refined-concrete"] = true,
+        ["yellow-refined-concrete"] = true,
         ["bio-tile"] = true,
         ["factory-entrance-1"] = true,
         ["factory-entrance-2"] = true,
@@ -226,9 +237,11 @@ script.on_init(function()
 end)
 
 script.on_configuration_changed(function(data)
-    for k,v in pairs(global.MapLegend) do
-        v.destroy()
-        game.get_player(k).set_shortcut_toggled("cmc_toggle_map_legend_shortcut", false)
+    if #global.MapLegend > 0 then
+        for k,v in pairs(global.MapLegend) do
+            v.destroy()
+            game.get_player(k).set_shortcut_toggled("cmc_toggle_map_legend_shortcut", false)
+        end
     end
     global.MapLegend = {}
     global.Position = {}
