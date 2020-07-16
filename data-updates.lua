@@ -115,58 +115,59 @@ function pickColor(object)
 	return color
 end
 
-
---Change Type Colors
-for _, entityType in pairs(entityTypes) do
-	local customColor = pickColor(entityType)
-	for k, v in pairs(data.raw[entityType]) do
-		v.friendly_map_color = customColor
+if settings.startup["custom-map-colors-preset"].value ~= "None" then
+	--Change Type Colors
+	for _, entityType in pairs(entityTypes) do
+		local customColor = pickColor(entityType)
+		for k, v in pairs(data.raw[entityType]) do
+			v.friendly_map_color = customColor
+		end
 	end
-end
 
 
---Change specified assembling-machine colors
-for _, machine in pairs(machines) do
-	data.raw["assembling-machine"][machine].friendly_map_color = pickColor(machine)
-end
+	--Change specified assembling-machine colors
+	for _, machine in pairs(machines) do
+		data.raw["assembling-machine"][machine].friendly_map_color = pickColor(machine)
+	end
 
 
---Change specified utility constant colors
-for _, utilConstant in pairs(utilConstants) do 
-	local name = (string.gsub(utilConstant,"-","_").."_color")
-	data.raw["utility-constants"]["default"].chart[name] = pickColor(utilConstant)
-end
+	--Change specified utility constant colors
+	for _, utilConstant in pairs(utilConstants) do 
+		local name = (string.gsub(utilConstant,"-","_").."_color")
+		data.raw["utility-constants"]["default"].chart[name] = pickColor(utilConstant)
+	end
 
 
-for _, belt in pairs(belts) do
-	local customColor = pickColor(belt.."transport-belt")
-	data.raw["transport-belt"][belt.."transport-belt"].friendly_map_color = customColor
-	data.raw["splitter"][belt.."splitter"].friendly_map_color = colorLib.multiply_color(customColor, 0.8)
-	data.raw["underground-belt"][belt.."underground-belt"].friendly_map_color = colorLib.multiply_color(customColor, 0.75)
-end
+	for _, belt in pairs(belts) do
+		local customColor = pickColor(belt.."transport-belt")
+		data.raw["transport-belt"][belt.."transport-belt"].friendly_map_color = customColor
+		data.raw["splitter"][belt.."splitter"].friendly_map_color = colorLib.multiply_color(customColor, 0.8)
+		data.raw["underground-belt"][belt.."underground-belt"].friendly_map_color = colorLib.multiply_color(customColor, 0.75)
+	end
 
 
-local customPipeColor = pickColor("pipe")
-local scale = ("None" == (settings.startup["custom-map-colors-preset"].value)) and 1 or nil
+	local customPipeColor = pickColor("pipe")
+	local scale = ("None" == (settings.startup["custom-map-colors-preset"].value)) and 1 or nil
 
-for _, v in pairs(data.raw["pipe"]) do
-	v.friendly_map_color = customPipeColor
-end
-for _, v in pairs(data.raw["pipe-to-ground"]) do
-	v.friendly_map_color = customPipeColor
-end
-for _, v in pairs(data.raw["pump"]) do
-	v.friendly_map_color = colorLib.multiply_color(customPipeColor, scale or 0.8)
-end
-for _, v in pairs(data.raw["storage-tank"]) do
-	v.friendly_map_color = colorLib.multiply_color(customPipeColor, scale or 0.66)
-end
+	for _, v in pairs(data.raw["pipe"]) do
+		v.friendly_map_color = customPipeColor
+	end
+	for _, v in pairs(data.raw["pipe-to-ground"]) do
+		v.friendly_map_color = customPipeColor
+	end
+	for _, v in pairs(data.raw["pump"]) do
+		v.friendly_map_color = colorLib.multiply_color(customPipeColor, scale or 0.8)
+	end
+	for _, v in pairs(data.raw["storage-tank"]) do
+		v.friendly_map_color = colorLib.multiply_color(customPipeColor, scale or 0.66)
+	end
 
 
-data.raw["rocket-silo"]["rocket-silo"].friendly_map_color = pickColor("rocket-silo")
+	data.raw["rocket-silo"]["rocket-silo"].friendly_map_color = pickColor("rocket-silo")
 
-for _,building in pairs(military) do
-	data.raw["utility-constants"]["default"].chart.default_friendly_color_by_type[building] = pickColor(building)
+	for _,building in pairs(military) do
+		data.raw["utility-constants"]["default"].chart.default_friendly_color_by_type[building] = pickColor(building)
+	end
 end
 
 if settings.startup["use-custom-map-colors-fancy-trees"].value then
@@ -307,8 +308,9 @@ end
 
 if settings.startup["custom-map-colors-map-tiles-preset"].value == "Dark Side of the Moon" then
 	for mapTile, color in pairs(mapTiles["Dark Side of the Moon"]) do
-		data.raw["tile"][mapTile].map_color = color
+		data.raw["tile"][mapTile].map_color = colorLib.toColor(color)
 	end
+	data.raw["resource"]["coal"].map_color = colorLib.toColor("505050")
 end
 
 if settings.startup["custom-map-colors-map-tiles-preset"].value == "Black" then
