@@ -1,3 +1,4 @@
+local util = require("__core__/lualib/util")
 local colorLib = {}
 
 function colorLib.isColor(input)

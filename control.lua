@@ -237,7 +237,7 @@ script.on_init(function()
 end)
 
 script.on_configuration_changed(function(data)
-    if #global.MapLegend > 0 then
+    if global.MapLegend and #global.MapLegend > 0 then
         for k,v in pairs(global.MapLegend) do
             v.destroy()
             game.get_player(k).set_shortcut_toggled("cmc_toggle_map_legend_shortcut", false)
@@ -245,7 +245,7 @@ script.on_configuration_changed(function(data)
     end
     global.MapLegend = {}
     global.Position = {}
-    if data.mod_startup_settings_changed or data.mod_changes ~=nil then
+    if data.mod_startup_settings_changed ~=nil then
         game.forces.player.rechart()
         generate_map_legend_data()
     end
