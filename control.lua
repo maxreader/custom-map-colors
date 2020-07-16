@@ -1,4 +1,6 @@
 
+
+
 if script.active_mods["debugadapter"] then require('__debugadapter__/debugadapter.lua') end
 
 local supportedEntities = require('data.entities-table')
@@ -100,7 +102,8 @@ local function generate_map_legend_data()
         ["lab-white"] = true,
         ["out-of-factory"] = true,
         ["out-of-map"] = true,
-        ["tutorial-grid"] = true
+        ["tutorial-grid"] = true,
+        ["BuildTile"] = true,
     }
     for name, tile in pairs(game.tile_prototypes) do
         if not tileBlacklist[name] then
@@ -177,8 +180,8 @@ end
 
 
 local function destroy_map_legend(player)
-    local MapLegend = global.MapLegend
-    MapLegend[player.index].destroy()
+    local legend = global.MapLegend[player.index]
+    legend.destroy()
 end
 
 local function toggle_map_legend(player)
@@ -223,6 +226,10 @@ script.on_init(function()
 end)
 
 script.on_configuration_changed(function(data)
+    for k,v in pairs(global.MapLegend) do
+        v.destroy()
+        game.get_player(k).set_shortcut_toggled("cmc_toggle_map_legend_shortcut", false)
+    end
     global.MapLegend = {}
     global.Position = {}
     if data.mod_startup_settings_changed or data.mod_changes ~=nil then
