@@ -1,16 +1,8 @@
-
-
-
-if script.active_mods["debugadapter"] then require('__debugadapter__/debugadapter.lua') end
-
 local supportedEntities = require('data.entities-table')
 local presets = require("data.presets")
 local activePreset = presets[(settings.startup["custom-map-colors-preset"].value)]
 local defaultPreset = presets.None
 local colorLib = require('code.colorLib')
-local mod_gui = require('__core__/lualib/mod-gui')
-
-
 
 local function pickColor(object)
 	Map_legend_data.entities[object] = colorLib.toColor(settings.startup["use-custom-"..object.."-color"].value and settings.startup["custom-"..object.."-color"].value or activePreset[object] or defaultPreset[object] or "006192")
@@ -190,17 +182,18 @@ end
 
 
 
-local function destroy_map_legend(player)
-    local legend = global.MapLegend[player.index]
+local function destroy_map_legend(index)
+    local legend = global.MapLegend[index]
     legend.destroy()
 end
 
-local function toggle_map_legend(player)
+local function toggle_map_legend(index)
+    local player = game.get_player(index)
     player.set_shortcut_toggled("cmc_toggle_map_legend_shortcut", not player.is_shortcut_toggled("cmc_toggle_map_legend_shortcut"))
     if player.is_shortcut_toggled("cmc_toggle_map_legend_shortcut") then
         create_map_legend(player)
     else
-        destroy_map_legend(player)
+        destroy_map_legend(index)
     end
 end
 
@@ -216,15 +209,13 @@ script.on_event(defines.events.on_gui_location_changed, on_gui_location_changed)
 -- quickbar shortcut
 script.on_event(defines.events.on_lua_shortcut, function(event)
     if event.prototype_name == "cmc_toggle_map_legend_shortcut" then
-	    local player = game.players[event.player_index]
-        toggle_map_legend(player)
+        toggle_map_legend(event.player_index)
     end
 end)
 
 -- hotkey
 script.on_event("cmc_toggle_map_legend", function(event)
-	local player = game.players[event.player_index]
-    toggle_map_legend(player)
+    toggle_map_legend(event.player_index)
 end)
 
 
