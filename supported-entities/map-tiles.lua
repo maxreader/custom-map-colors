@@ -26,7 +26,8 @@ return{
         ["red-desert-2"] = "785e4e",
         ["red-desert-3"] = "72564b",
         landfill = "362e25"
-      },
+    },
+    ["Autumn Leaves"] = {},
     ["Winter Wonderland"] = {
       deepwater = "9b9b9b",
       ["deepwater-green"] = "8c8c8c",
@@ -56,233 +57,45 @@ return{
       landfill = "969696"
     },
     ["Dark Side of the Moon"] = {
-      concrete = {
-        a = 1,
-        b = 50.5,
-        g = 50.5,
-        r = 50.5
-      },
-      deepwater = {
-        a = 1,
-        b = 28.25,
-        g = 28.25,
-        r = 28.25
-      },
-      ["deepwater-green"] = {
-        a = 1,
-        b = 0.55374999999999996,
-        g = 0.55374999999999996,
-        r = 0.55374999999999996
-      },
-      ["dirt-1"] = {
-        a = 1,
-        b = 51.5,
-        g = 51.5,
-        r = 51.5
-      },
-      ["dirt-2"] = {
-        a = 1,
-        b = 46.5,
-        g = 46.5,
-        r = 46.5
-      },
-      ["dirt-3"] = {
-        a = 1,
-        b = 41.5,
-        g = 41.5,
-        r = 41.5
-      },
-      ["dirt-4"] = {
-        a = 1,
-        b = 37,
-        g = 37,
-        r = 37
-      },
-      ["dirt-5"] = {
-        a = 1,
-        b = 41.5,
-        g = 41.5,
-        r = 41.5
-      },
-      ["dirt-6"] = {
-        a = 1,
-        b = 33,
-        g = 33,
-        r = 33
-      },
-      ["dirt-7"] = {
-        a = 1,
-        b = 25.75,
-        g = 25.75,
-        r = 25.75
-      },
-      ["dry-dirt"] = {
-        a = 1,
-        b = 45.25,
-        g = 45.25,
-        r = 45.25
-      },
-      ["grass-1"] = {
-        a = 1,
-        b = 20.5,
-        g = 20.5,
-        r = 20.5
-      },
-      ["grass-2"] = {
-        a = 1,
-        b = 23.5,
-        g = 23.5,
-        r = 23.5
-      },
-      ["grass-3"] = {
-        a = 1,
-        b = 25.5,
-        g = 25.5,
-        r = 25.5
-      },
-      ["grass-4"] = {
-        a = 1,
-        b = 22.75,
-        g = 22.75,
-        r = 22.75
-      },
-      ["hazard-concrete-left"] = {
-        a = 1,
-        b = 0.625,
-        g = 0.625,
-        r = 0.625
-      },
-      ["hazard-concrete-right"] = {
-        a = 1,
-        b = 0.625,
-        g = 0.625,
-        r = 0.625
-      },
-      ["lab-dark-1"] = {
-        a = 1,
-        b = 0.5,
-        g = 0.5,
-        r = 0.5
-      },
-      ["lab-dark-2"] = {
-        a = 1,
-        b = 0.6,
-        g = 0.6,
-        r = 0.6
-      },
-      ["lab-white"] = {
-        a = 1,
-        b = 1,
-        g = 1,
-        r = 1
-      },
-      landfill = {
-        a = 1,
-        b = 23.25,
-        g = 23.25,
-        r = 23.25
-      },
-      ["out-of-map"] = {
-        a = 1,
-        b = 0.5,
-        g = 0.5,
-        r = 0.5
-      },
-      ["red-desert-0"] = {
-        a = 1,
-        b = 37.25,
-        g = 37.25,
-        r = 37.25
-      },
-      ["red-desert-1"] = {
-        a = 1,
-        b = 45,
-        g = 45,
-        r = 45
-      },
-      ["red-desert-2"] = {
-        a = 1,
-        b = 50,
-        g = 50,
-        r = 50
-      },
-      ["red-desert-3"] = {
-        a = 1,
-        b = 47.75,
-        g = 47.75,
-        r = 47.75
-      },
-      ["refined-concrete"] = {
-        a = 1,
-        b = 50.5,
-        g = 50.5,
-        r = 50.5
-      },
-      ["refined-hazard-concrete-left"] = {
-        a = 1,
-        b = 0.625,
-        g = 0.625,
-        r = 0.625
-      },
-      ["refined-hazard-concrete-right"] = {
-        a = 1,
-        b = 0.625,
-        g = 0.625,
-        r = 0.625
-      },
-      ["sand-1"] = {
-        a = 1,
-        b = 62.75,
-        g = 62.75,
-        r = 62.75
-      },
-      ["sand-2"] = {
-        a = 1,
-        b = 55.5,
-        g = 55.5,
-        r = 55.5
-      },
-      ["sand-3"] = {
-        a = 1,
-        b = 53,
-        g = 53,
-        r = 53
-      },
-      ["stone-path"] = {
-        a = 1,
-        b = 25.5,
-        g = 25.5,
-        r = 25.5
-      },
-      ["tutorial-grid"] = {
-        a = 1,
-        b = 0.5,
-        g = 0.5,
-        r = 0.5
-      },
-      water = {
-        a = 1,
-        b = 37,
-        g = 37,
-        r = 37
-      },
-      ["water-green"] = {
-        a = 1,
-        b = 17,
-        g = 17,
-        r = 17
-      },
-      ["water-mud"] = {
-        a = 1,
-        b = 39.25,
-        g = 39.25,
-        r = 39.25
-      },
-      ["water-shallow"] = {
-        a = 1,
-        b = 45.5,
-        g = 45.5,
-        r = 45.5
-      }
-    }
+      concrete = "323232",
+      deepwater = "1c1c1c",
+      ["deepwater-green"] = "8d8d8d",
+      ["dirt-1"] = "333333",
+      ["dirt-2"] = "2e2e2e",
+      ["dirt-3"] = "292929",
+      ["dirt-4"] = "252525",
+      ["dirt-5"] = "292929",
+      ["dirt-6"] = "212121",
+      ["dirt-7"] = "191919",
+      ["dry-dirt"] = "2d2d2d",
+      ["grass-1"] = "141414",
+      ["grass-2"] = "171717",
+      ["grass-3"] = "191919",
+      ["grass-4"] = "161616",
+      ["hazard-concrete-left"] = "9f9f9f",
+      ["hazard-concrete-right"] = "9f9f9f",
+      ["lab-dark-1"] = "7f7f7f",
+      ["lab-dark-2"] = "999999",
+      ["lab-white"] = "ffffff",
+      landfill = "171717",
+      ["out-of-map"] = "7f7f7f",
+      ["red-desert-0"] = "252525",
+      ["red-desert-1"] = "2d2d2d",
+      ["red-desert-2"] = "323232",
+      ["red-desert-3"] = "2f2f2f",
+      ["refined-concrete"] = "323232",
+      ["refined-hazard-concrete-left"] = "9f9f9f",
+      ["refined-hazard-concrete-right"] = "9f9f9f",
+      ["sand-1"] = "3e3e3e",
+      ["sand-2"] = "373737",
+      ["sand-3"] = "353535",
+      ["stone-path"] = "191919",
+      ["tutorial-grid"] = "7f7f7f",
+      water = "252525",
+      ["water-green"] = "111111",
+      ["water-mud"] = "272727",
+      ["water-shallow"] = "2d2d2d"
+    },
+    Black = {},
+    ["Error: Map not found."] = {}
 }

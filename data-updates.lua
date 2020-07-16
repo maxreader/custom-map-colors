@@ -70,6 +70,42 @@ if settings.startup["custom-map-colors-preset"].value == "Monochrome" then
 	end
 end
 
+--[[Vaporwave Sunset
+if settings.startup["custom-map-colors-preset"].value == "Vaporwave Sunset" then
+	activePreset = presets.Default
+	for object, color in pairs(presets.Default) do
+		if not tiles[object] then
+			local hsv = colorLib.RGBtoHSV(colorLib.toColor(color))
+			local x = hsv.v * hsv.s
+			hsv.v = 3*x/4 + 0.25
+			hsv.h = 160*x - 115
+			hsv.s = 0.8
+			if hsv.h > 0 then
+				hsv.h = hsv.h + 360
+			end
+			activePreset[object] = colorLib.HSVtoRGB(hsv)
+		end
+	end
+end]]
+
+--[[Jazz Cup
+if settings.startup["custom-map-colors-preset"].value == "Jazz Cup" then
+	activePreset = presets.Default
+	for object, color in pairs(presets.Default) do
+		if not tiles[object] then
+			local hsv = colorLib.RGBtoHSV(colorLib.toColor(color))
+			local x = hsv.v * hsv.s
+			hsv.v = x*0.6 + 0.2
+			hsv.h = (147-300)*x + 300
+			hsv.s = 0.8
+			if hsv.h < 0 then
+				hsv.h = hsv.h + 360
+			end
+			activePreset[object] = colorLib.HSVtoRGB(hsv)
+		end
+	end
+end]]
+
 
 --currentColors is used for testing and debugging
 local currentColors = {}
@@ -133,6 +169,30 @@ for _,building in pairs(military) do
 	data.raw["utility-constants"]["default"].chart.default_friendly_color_by_type[building] = pickColor(building)
 end
 
+if settings.startup["use-custom-map-colors-fancy-trees"].value then
+	for name,object in pairs(data.raw["tree"]) do
+		local totalColor = {r=0,g=0,b=0,a=0}
+		local numberOfColors = 0
+		local colors = object.colors
+		if colors then
+			for _,v in pairs(colors) do
+				totalColor.r = totalColor.r+v.r
+				totalColor.g = totalColor.g+v.g
+				totalColor.b = totalColor.b+v.b
+				totalColor.a = totalColor.a + (v.a or 1)
+				numberOfColors = numberOfColors + 1
+			end
+			local avgColor = {}
+			for k,v in pairs(totalColor) do
+				avgColor[k] = v/numberOfColors
+			end
+			avgColor.a = 0.2
+			data.raw["tree"][name].map_color = colorLib.toColor(avgColor)
+		else
+			data.raw["tree"][name].map_color = colorLib.toColor("806b344c")
+		end
+	end
+end
 
 --[[local mapTiles = {}
 for k,v in pairs(data.raw["tile"]) do
@@ -152,6 +212,7 @@ end]]
 
 
 --non path tiles
+--Default 0.17
 if settings.startup["custom-map-colors-map-tiles-preset"].value == "Default 0.17" then
 	for mapTile, color in pairs(defaultMapTiles) do
 		local hsv = colorLib.RGBtoHSV(colorLib.toColor(color))
@@ -161,13 +222,87 @@ if settings.startup["custom-map-colors-map-tiles-preset"].value == "Default 0.17
 	end
 end
 
+if settings.startup["custom-map-colors-map-tiles-preset"].value == "Autumn Leaves" then
+	for mapTile, color in pairs(defaultMapTiles) do
+		color = colorLib.toColor(color)
+		fallColor = util.mix_color(color,colorLib.toColor("ffe39e"))
+		data.raw["tile"][mapTile].map_color = fallColor
+	end
+	--trees
+	for name,object in pairs(data.raw["tree"]) do
+		local totalColor = {r=0,g=0,b=0,a=0}
+		local numberOfColors = 0
+		local colors = object.colors
+		if colors then
+			for _,v in pairs(colors) do
+				totalColor.r = totalColor.r+v.r
+				totalColor.g = totalColor.g+v.g
+				totalColor.b = totalColor.b+v.b
+				totalColor.a = totalColor.a + (v.a or 1)
+				numberOfColors = numberOfColors + 1
+			end
+			local avgColor = {}
+			for k,v in pairs(totalColor) do
+				avgColor[k] = v/numberOfColors
+			end
+			local hsv = colorLib.RGBtoHSV(avgColor)
+			hsv.h = hsv.h/3-0.0
+			hsv.s = 1
+			if name ~= "tree-04" then
+				avgColor = colorLib.HSVtoRGB(hsv)
+			else
+				avgColor = {r = 0.19, g = 0.39, b = 0.19, a = 0.19}
+			end
+			avgColor.a = 0.2
+			data.raw["tree"][name].map_color = colorLib.toColor(avgColor)
+		else
+			data.raw["tree"][name].map_color = colorLib.toColor("806b344c")
+		end
+	end
+end
+
 if settings.startup["custom-map-colors-map-tiles-preset"].value == "Winter Wonderland" then
+	--make all tiles unsaturated and lighter
 	for tile,name in pairs(data.raw["tile"]) do
 		local hsl = colorLib.RGBtoHSL(colorLib.toColor(name.map_color))
 		hsl.s = 0
 		hsl.l = (1+hsl.l)/2
 		data.raw["tile"][tile].map_color = colorLib.toColor(colorLib.HSLtoRGB(hsl))
 	end
+	--trees, make all of them brown except for tree-04
+	for name,object in pairs(data.raw["tree"]) do
+		local totalColor = {r=0,g=0,b=0,a=0}
+		local numberOfColors = 0
+		local colors = object.colors
+		if colors then
+			for _,v in pairs(colors) do
+				totalColor.r = totalColor.r+v.r
+				totalColor.g = totalColor.g+v.g
+				totalColor.b = totalColor.b+v.b
+				totalColor.a = totalColor.a + (v.a or 1)
+				numberOfColors = numberOfColors + 1
+			end
+			local avgColor = {}
+			for k,v in pairs(totalColor) do
+				avgColor[k] = v/numberOfColors
+			end
+			local brown = colorLib.RGBtoHSV(colorLib.toColor("945b15"))
+			local hsv = colorLib.RGBtoHSV(avgColor)
+			hsv.s = 1
+			hsv.h = brown.h
+			hsv.v = hsv.h/90
+			if name ~= "tree-04" then
+				avgColor = colorLib.HSVtoRGB(hsv)
+			else
+				avgColor = {r = 0.19, g = 0.39, b = 0.19, a = 0.19}
+			end
+			avgColor.a = 0.2
+			data.raw["tree"][name].map_color = colorLib.toColor(avgColor)
+		else
+			data.raw["tree"][name].map_color = colorLib.toColor("806b344c")
+		end
+	end
+	data.raw["resource"]["stone"].map_color = colorLib.toColor("cca65e")
 end
 
 if settings.startup["custom-map-colors-map-tiles-preset"].value == "Dark Side of the Moon" then
@@ -175,11 +310,14 @@ if settings.startup["custom-map-colors-map-tiles-preset"].value == "Dark Side of
 		data.raw["tile"][mapTile].map_color = color
 	end
 end
+
 if settings.startup["custom-map-colors-map-tiles-preset"].value == "Black" then
 	local black = colorLib.toColor("000000")
 	for tile, _ in pairs(mapTiles["Default 0.17"]) do
 		data.raw["tile"][tile].map_color = black
 	end
+	--Make coal lighter, visible
+	data.raw["resource"]["coal"].map_color = colorLib.toColor("505050")
 end
 
 if settings.startup["custom-map-colors-map-tiles-preset"].value == "Error: Map not found." then
@@ -198,7 +336,7 @@ if settings.startup["custom-map-colors-map-tiles-preset"].value == "Error: Map n
 	data.raw["cliff"]["cliff"].map_color = black
 end
 
---Change specified tile colors
+--Path tiles
 for _, tile in pairs(tiles) do
 	local customColor = pickColor(tile)
 	if data.raw["tile"][tile] then
@@ -208,4 +346,11 @@ for _, tile in pairs(tiles) do
 		data.raw["tile"][tile.."-right"].map_color = customColor
 	end
 end
---log(serpent.block(currentColors, {sortkeys = true}))
+--[[log(serpent.block(currentColors, {sortkeys = false}))
+log(serpent.line("Dark Side of the Moon"))
+activeMapTiles = {}
+for k,v in pairs(mapTiles["Dark Side of the Moon"]) do
+	activeMapTiles[k] = colorLib.colorToHex(v)
+end
+log(serpent.block(activeMapTiles, {sortkeys = false}))
+	]]

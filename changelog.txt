@@ -1,4 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.3.0
+Date: 2019.12.xx
+  1. Two new entity presets:
+    - Vaporwave Sunset
+    - Jazz Cup
+  2. New tile preset:
+    - Autumn Leaves
+  3. Tweaked resource colors for tile presets:
+    - Stone more visible on Winter Wonderland
+    - Coal visible on Black
+  4. Added fancy trees option
+---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 2019.12.13
   1. Now supports decimal RGB codes:
@@ -24,5 +36,6 @@ Date: 2019.12.13
     - Walls and Gates
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.0
+Date: 2019.11.28
   Info:
     - Initial release

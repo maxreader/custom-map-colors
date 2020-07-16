@@ -1,9 +1,13 @@
 local presets = require("presets")
-customMapColorsAllowedPresets = {}
+local mapTiles = require("supported-entities.map-tiles")
+local customMapColorsAllowedPresets = {}
 for k,_ in pairs(presets) do
     table.insert(customMapColorsAllowedPresets, k)
 end
-
+local customMapTileColorPresets= {}
+for k,_ in pairs(mapTiles) do
+    table.insert(customMapTileColorPresets, k)
+end
 data:extend({
     {
         type = "string-setting",
@@ -25,7 +29,7 @@ data:extend({
         name = "custom-map-colors-map-tiles-preset",
         setting_type = "startup",
         default_value = "Default 0.17",
-        allowed_values = {"Default 0.17","Winter Wonderland","Dark Side of the Moon","Black","Error: Map not found."},
+        allowed_values = customMapTileColorPresets,
         order = "3"
     },
     {
@@ -36,6 +40,13 @@ data:extend({
         minimum_value = 0.1,
         maximum_value = 10,
         order = "4"
+    },
+    {
+        type = "bool-setting",
+        name = "use-custom-map-colors-fancy-trees",
+        setting_type = "startup",
+        default_value = true,
+        order = "5"
     },
     {
         type = "bool-setting",
