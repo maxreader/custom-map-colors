@@ -1,11 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.0
+Date: 2020.02.05
+  1. New:
+    - Map Legend
+---------------------------------------------------------------------------------------------------
 Version: 0.5.0
 Date: 2020.01.22
   1. Fixes:
     - Beacons, pipes, roboports, should work with 0.18 properly
   2. Changes:
     - Error: Map not found preset now also removes trains, train stops, and vehicles from the map. This leaves player set map-markers and programmable speakers as the only visible objects.
-
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.1
 Date: 2020.01.22

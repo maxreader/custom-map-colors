@@ -1,55 +1,4 @@
-local supportedEntities = {
-    belts = {
-        "",
-        "fast-",
-        "express-"
-    },
-    machines = {
-        "chemical-plant",
-        "oil-refinery",
-        "centrifuge"
-    },
-    types ={
-        "assembling-machine",
-        "furnace",
-        "lab",
-        "reactor",
-        "boiler",
-        "electric-pole",
-        "radar",
-        "rocket-silo"
-    },
-    paths = {
-        "stone-path",
-        "concrete",
-        "hazard-concrete",
-        "refined-concrete",
-        "refined-hazard-concrete" 
-     },
-     default_friendly_color_by_type = {
-        "solar-panel",
-        "accumulator",
-        "ammo-turret",
-        "fluid-turret",
-        "electric-turret",
-        "wall",
-        "gate"
-    },
-    default_color_by_type = {
-        "heat-pipe",
-        "beacon",
-        "generator",
-        "roboport"
-    },
-    utilConstants = {
-        "default-friendly",
-        "vehicle-outer",
-        "vehicle-inner",
-        "rail",
-    }
-    
-}
-
+local supportedEntities = require('data.entities-table')
 local presets = require("data.presets")
 local activePreset = presets[(settings.startup["custom-map-colors-preset"].value)]
 local defaultPreset = presets.None
@@ -74,17 +23,17 @@ if settings.startup["custom-map-colors-preset"].value ~= "None" then
     chart.default_color_by_type['storage-tank'] = colorLib.multiply_color(pipeColor, scale or 0.66)
 
 	--Default Colors by Type
-    for _, entity in pairs(supportedEntities.default_color_by_type) do
-        chart.default_color_by_type[entity] = pickColor(entity)
+    for _, v in pairs(supportedEntities.default_color_by_type) do
+        chart.default_color_by_type[v] = pickColor(v)
     end
-    for _, entity in pairs(supportedEntities.default_friendly_color_by_type) do
-        chart.default_friendly_color_by_type[entity] = pickColor(entity)
+    for _, v in pairs(supportedEntities.default_friendly_color_by_type) do
+        chart.default_friendly_color_by_type[v] = pickColor(v)
     end
 
     --Change Type Colors
-	for _, entityType in pairs(supportedEntities.types) do
-		local customColor = pickColor(entityType)
-		for k, v in pairs(data.raw[entityType]) do
+	for _, v in pairs(supportedEntities.types) do
+		local customColor = pickColor(v)
+		for k, v in pairs(data.raw[v]) do
 			v.friendly_map_color = customColor
 		end
     end
@@ -109,7 +58,7 @@ if settings.startup["custom-map-colors-preset"].value ~= "None" then
     end
     
     --Rocket Silo
-    data.raw["rocket-silo"]["rocket-silo"].friendly_map_color = pickColor("rocket-silo")
+    --data.raw["rocket-silo"]["rocket-silo"].friendly_map_color = pickColor("rocket-silo")
 
     --Path Tiles
     for _, tile in pairs(supportedEntities.paths) do

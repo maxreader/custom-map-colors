@@ -191,4 +191,23 @@ function colorLib.HSVtoRGB(color)
 	}
 end
 
+function colorLib.get_color_distance(color1, color2)
+	color1 = colorLib.toColor(color1)
+	color2 = colorLib.toColor(color2)
+	local disp = {r = color1.r - color2.r, g = color2.g - color2.g, b = color1.b - color2.b}
+	return disp.r*disp.r + disp.g*disp.g + disp.b*disp.b
+end
+
+
+function colorLib.find_closest_color(color, table)
+	local closestColor
+	local min = 1
+	for k,v in pairs(table) do
+		local distance = colorLib.get_color_distance(color,v)
+		min = (distance < min) and distance or min
+		closestColor = k
+	end
+	return closestColor
+end
+
 return colorLib
