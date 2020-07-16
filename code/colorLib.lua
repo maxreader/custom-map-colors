@@ -1,15 +1,29 @@
 local util = require("__core__/lualib/util")
 local colorLib = {}
 
+
+-- Takes an input, checks if it is a table with three or four entries
+-- converts
 function colorLib.isColor(input)
 	if type(input) ~= "table" then
 		return nil
-	end
-	for k,v in pairs(input) do
-		if v > 1 then
-			input[k] = v/255
-		end
-	end
+    end
+    local length = table_size(input)
+    if length ~= 3 and length ~= 4 then
+        return nil
+    end
+    local is_small = true
+    for _,v in pairs(input) do 
+        if v > 1 then
+            is_small = false
+            break
+        end
+    end
+    if not is_small then
+        for k,v in pairs(input) do
+            input[k] = v/255
+        end
+    end
 	local color = {
 		r = input.r or input[1],
 		g = input.g or input[2],
@@ -28,7 +42,7 @@ function colorLib.colorToHex(color)
 			v = v * 255
 		end
 		hex[n] = string.format("%x",v)
-		if hex[n]:len() ==	 1 then
+		if hex[n]:len() == 1 then
 			hex[n] = "0"..hex[n]
 		end
 		n = n + 1
@@ -36,7 +50,7 @@ function colorLib.colorToHex(color)
 	if hex[4] == "ff" then
 		table.remove(hex,4)
 	end
-	local hex = table.concat(hex)
+	hex = table.concat(hex)
 	return hex
 end
 
@@ -101,8 +115,18 @@ function colorLib.multiply_color(c1, n)
 	}
 end
 
+function colorLib.multiply_colors(c1, c2)
+    return {
+        r = (c1.r or c1[1] or 1) * (c2.r or c2[1] or 1),
+        g = (c1.g or c1[2] or 1) * (c2.g or c2[2] or 1),
+        b = (c1.b or c1[3] or 1) * (c2.b or c2[3] or 1),
+        a = (c1.a or c1[4] or 1) * (c2.a or c2[4] or 1)
+    }
+end
+
 --These functions all from the formulas given here: https://en.wikipedia.org/wiki/HSL_and_HSV
 function colorLib.RGBtoHSL(color)
+    color = colorLib.toColor(color)
 	local r,g,b = color.r, color.g, color.b
 	local max = math.max(r,g,b)
 	local min = math.min(r,g,b)
@@ -136,6 +160,7 @@ function colorLib.RGBtoHSL(color)
 end
 
 function colorLib.RGBtoHSV(color)
+    color = colorLib.toColor(color)
 	local r,g,b = color.r, color.g, color.b
 	local max = math.max(r,g,b)
 	local min = math.min(r,g,b)
@@ -201,6 +226,7 @@ end
 
 
 function colorLib.find_closest_color(color, table)
+    color = colorLib.toColor(color)
 	local closestColor
 	local min = 1
 	for k,v in pairs(table) do
