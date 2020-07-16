@@ -4,6 +4,18 @@ local activePreset = presets[(settings.startup["custom-map-colors-preset"].value
 local defaultPreset = presets.None
 local colorLib = require("code.colorLib")
 
+if settings.startup["custom-map-colors-preset"].value == "Monochrome" then
+    for object, color in pairs(presets["Default"]) do
+        color = colorLib.RGBtoHSV(color)
+        local monochromeColor = colorLib.RGBtoHSV(settings.startup["custom-map-colors-monochrome"].value)
+        color.s = color.s * monochromeColor.s
+        color.v = color.v * monochromeColor.v
+        color.a = color.a * monochromeColor.a
+        color.h = monochromeColor.h
+        activePreset[object] = colorLib.HSVtoRGB(color)
+    end
+end
+
 local currentColors = {}
 local function pickColor(object)
 	local color = colorLib.toColor(settings.startup["use-custom-"..object.."-color"].value and settings.startup["custom-"..object.."-color"].value or activePreset[object] or defaultPreset[object])
@@ -58,7 +70,7 @@ if settings.startup["custom-map-colors-preset"].value ~= "None" then
     end
     
     --Rocket Silo
-    --data.raw["rocket-silo"]["rocket-silo"].friendly_map_color = pickColor("rocket-silo")
+    data.raw["rocket-silo"]["rocket-silo"].friendly_map_color = pickColor("rocket-silo")
 
     --Path Tiles
     for _, tile in pairs(supportedEntities.paths) do
